@@ -4,41 +4,57 @@ import { useEffect, useState } from "react"
 import type { User, CleanupEvent, CommunityPost } from "../database/schema"
 import { userStorage, eventStorage, postStorage, sessionStorage, initializeData } from "../database/storage"
 
+let databaseInstance: any = null
+
 export function useDatabase() {
   const [isInitialized, setIsInitialized] = useState(false)
 
   useEffect(() => {
-    initializeData()
+    if (!databaseInstance) {
+      initializeData()
+      databaseInstance = {
+        users: userStorage,
+        events: eventStorage,
+        posts: postStorage,
+        session: sessionStorage,
+      }
+    }
     setIsInitialized(true)
   }, [])
 
   return {
     isInitialized,
-    users: userStorage,
-    events: eventStorage,
-    posts: postStorage,
-    session: sessionStorage,
+    users: databaseInstance?.users || userStorage,
+    events: databaseInstance?.events || eventStorage,
+    posts: databaseInstance?.posts || postStorage,
+    session: databaseInstance?.session || sessionStorage,
   }
 }
 
 export function useCurrentUser() {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
-  const { session, users } = useDatabase()
+  const { session, users, isInitialized } = useDatabase()
 
   useEffect(() => {
-    const user = session.getCurrentUser()
-    setCurrentUser(user)
-  }, [session])
+    if (isInitialized && session) {
+      const user = session.getCurrentUser()
+      setCurrentUser(user)
+    }
+  }, [session, isInitialized])
 
   const login = (userId: string) => {
-    session.setCurrentUser(userId)
-    const user = users.getById(userId)
-    setCurrentUser(user)
+    if (session && users) {
+      session.setCurrentUser(userId)
+      const user = users.getById(userId)
+      setCurrentUser(user)
+    }
   }
 
   const logout = () => {
-    session.clearCurrentUser()
-    setCurrentUser(null)
+    if (session) {
+      session.clearCurrentUser()
+      setCurrentUser(null)
+    }
   }
 
   return { currentUser, login, logout }
@@ -46,13 +62,16 @@ export function useCurrentUser() {
 
 export function useEvents() {
   const [events, setEvents] = useState<CleanupEvent[]>([])
-  const { events: eventStorage } = useDatabase()
+  const { events: eventStorage, isInitialized } = useDatabase()
 
   useEffect(() => {
-    setEvents(eventStorage.getAll())
-  }, [eventStorage])
+    if (isInitialized && eventStorage) {
+      setEvents(eventStorage.getAll())
+    }
+  }, [eventStorage, isInitialized])
 
   const joinEvent = (eventId: string, userId: string) => {
+    if (!eventStorage) return false
     const success = eventStorage.joinEvent(eventId, userId)
     if (success) {
       setEvents(eventStorage.getAll())
@@ -65,13 +84,16 @@ export function useEvents() {
 
 export function usePosts() {
   const [posts, setPosts] = useState<CommunityPost[]>([])
-  const { posts: postStorage } = useDatabase()
+  const { posts: postStorage, isInitialized } = useDatabase()
 
   useEffect(() => {
-    setPosts(postStorage.getAll())
-  }, [postStorage])
+    if (isInitialized && postStorage) {
+      setPosts(postStorage.getAll())
+    }
+  }, [postStorage, isInitialized])
 
   const likePost = (postId: string, userId: string) => {
+    if (!postStorage) return false
     const success = postStorage.likePost(postId, userId)
     if (success) {
       setPosts(postStorage.getAll())
@@ -80,6 +102,7 @@ export function usePosts() {
   }
 
   const createPost = (post: Omit<CommunityPost, "id">) => {
+    if (!postStorage) return null
     const newPost = postStorage.create(post)
     setPosts(postStorage.getAll())
     return newPost

@@ -53,8 +53,8 @@ export default function AboutPage() {
             <h1 className="text-4xl font-bold text-foreground">About Eco-Sanjivani</h1>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-balance">
-            Born from a passion for marine conservation and powered by cutting-edge technology, Eco-Sanjivani is
-            revolutionizing how we protect India's coastal ecosystems.
+            Born from a passion for environmental conservation and powered by cutting-edge technology, Eco-Sanjivani is
+            revolutionizing how we protect India's diverse ecosystems.
           </p>
         </div>
       </section>
@@ -65,8 +65,8 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">Our Mission</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-              To create a sustainable future for India's marine ecosystems through technology-driven conservation
-              efforts and community engagement.
+              To create a sustainable future for India's diverse ecosystems through technology-driven conservation
+              efforts and community engagement across forests, wetlands, coastal areas, and urban environments.
             </p>
           </div>
 
@@ -76,10 +76,10 @@ export default function AboutPage() {
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Waves className="h-6 w-6 text-blue-600" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Ocean Protection</h3>
+                <h3 className="font-semibold text-foreground mb-2">Ecosystem Protection</h3>
                 <p className="text-sm text-muted-foreground">
-                  Safeguarding marine life and coastal ecosystems through organized cleanup drives and conservation
-                  initiatives.
+                  Safeguarding wildlife and natural habitats through organized cleanup drives and conservation
+                  initiatives across all ecosystem types.
                 </p>
               </CardContent>
             </Card>
@@ -91,7 +91,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">Education & Awareness</h3>
                 <p className="text-sm text-muted-foreground">
-                  Educating communities about marine conservation and empowering them to take action.
+                  Educating communities about environmental conservation and empowering them to take action.
                 </p>
               </CardContent>
             </Card>
@@ -103,7 +103,8 @@ export default function AboutPage() {
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">Technology Innovation</h3>
                 <p className="text-sm text-muted-foreground">
-                  Leveraging AI and ML to predict pollution patterns and optimize conservation efforts.
+                  Leveraging AI and ML to predict pollution patterns and optimize conservation efforts across all
+                  environments.
                 </p>
               </CardContent>
             </Card>
@@ -117,8 +118,8 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">Meet the Creators</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-              Two passionate BTech students from NMIMS who turned their concern for marine life into a technology-driven
-              conservation platform.
+              Two passionate BTech students from NMIMS who turned their concern for environmental protection into a
+              technology-driven conservation platform.
             </p>
           </div>
 
@@ -218,7 +219,7 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">Our Impact</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-              Since launching Eco-Sanjivani, we've made significant strides in marine conservation across India.
+              Since launching Eco-Sanjivani, we've made significant strides in environmental conservation across India.
             </p>
           </div>
 
@@ -236,8 +237,8 @@ export default function AboutPage() {
               <div className="text-sm text-muted-foreground">Waste Collected</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary mb-2">50+</div>
-              <div className="text-sm text-muted-foreground">Beaches Protected</div>
+              <div className="text-3xl font-bold text-primary mb-2">100+</div>
+              <div className="text-sm text-muted-foreground">Areas Protected</div>
             </div>
           </div>
         </div>
@@ -248,8 +249,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-foreground mb-4">Get In Touch</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto text-balance">
-            Have questions about our platform or want to collaborate on marine conservation initiatives? We'd love to
-            hear from you!
+            Have questions about our platform or want to collaborate on environmental conservation initiatives? We'd
+            love to hear from you!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>

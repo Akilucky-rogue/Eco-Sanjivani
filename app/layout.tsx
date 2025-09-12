@@ -10,9 +10,9 @@ import { I18nProvider } from "@/lib/i18n/context"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Eco-Sanjivani - Marine Conservation Platform",
+  title: "Eco-Sanjivani - Environmental Conservation Platform",
   description:
-    "Join the movement to protect India's marine ecosystems through gamified community action and environmental conservation.",
+    "Join the movement to protect India's diverse ecosystems through gamified community action and environmental conservation across forests, wetlands, coastal areas, and urban environments.",
   generator: "v0.app",
 }
 

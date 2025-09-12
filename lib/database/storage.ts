@@ -11,11 +11,14 @@ const STORAGE_KEYS = {
   CURRENT_USER: "eco-sanjivani-current-user",
 }
 
+let isInitialized = false
+
 // Initialize data if not exists
 export function initializeData() {
-  if (typeof window === "undefined") return
+  if (typeof window === "undefined" || isInitialized) return
 
   console.log("[v0] Initializing database...")
+  isInitialized = true
 
   if (!localStorage.getItem(STORAGE_KEYS.USERS)) {
     console.log("[v0] Creating initial users...")

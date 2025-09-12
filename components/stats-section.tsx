@@ -12,13 +12,13 @@ const stats = [
     icon: Trash2,
     value: "150 Tons",
     label: "Waste Collected",
-    description: "Plastic removed from marine environments",
+    description: "Plastic removed from all environments",
   },
   {
     icon: MapPin,
     value: "500+",
     label: "Cleanup Events",
-    description: "Organized across Indian coastlines",
+    description: "Organized across India's diverse ecosystems",
   },
   {
     icon: Award,
@@ -35,7 +35,7 @@ export function StatsSection() {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-balance mb-4">Our Collective Impact</h2>
           <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
-            Together, we're creating measurable change for India's marine ecosystems
+            Together, we're creating measurable change for India's diverse ecosystems
           </p>
         </div>
 
