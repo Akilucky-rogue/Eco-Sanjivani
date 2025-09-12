@@ -82,7 +82,7 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     <Card className="w-full max-w-md mx-auto">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl font-bold text-blue-600">Join Eco-Sanjivani</CardTitle>
-        <CardDescription>Start your journey in marine conservation</CardDescription>
+        <CardDescription>Start your journey in ecosystem conservation</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">

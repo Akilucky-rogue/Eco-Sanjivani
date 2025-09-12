@@ -8,10 +8,6 @@ function getScientificName(commonName: string): string {
     coral: "Anthozoa spp.",
     fish: "Pisces spp.",
     seabird: "Charadriiformes spp.",
-    "marine mammal": "Cetacea spp.",
-    crustacean: "Crustacea spp.",
-    mollusk: "Mollusca spp.",
-    "marine plant": "Algae spp.",
   }
   return mapping[commonName] || "Species unknown"
 }
@@ -22,10 +18,6 @@ function getConservationStatus(commonName: string): string {
     whale: "Vulnerable",
     dolphin: "Least Concern",
     coral: "Near Threatened",
-    "marine mammal": "Vulnerable",
-    crustacean: "Least Concern",
-    mollusk: "Least Concern",
-    "marine plant": "Least Concern",
   }
   return mapping[commonName] || "Data Deficient"
 }
@@ -36,10 +28,6 @@ function getHabitat(commonName: string): string {
     dolphin: "Open ocean, coastal waters",
     whale: "Deep ocean waters",
     coral: "Shallow tropical waters",
-    "marine mammal": "Various marine environments",
-    crustacean: "Various marine environments",
-    mollusk: "Various marine environments",
-    "marine plant": "Various marine environments",
   }
   return mapping[commonName] || "Marine environment"
 }
@@ -50,10 +38,6 @@ function getThreats(commonName: string): string[] {
     dolphin: ["Fishing nets", "Noise pollution", "Habitat loss"],
     whale: ["Ship strikes", "Noise pollution", "Climate change"],
     coral: ["Ocean acidification", "Warming waters", "Pollution"],
-    "marine mammal": ["Ship strikes", "Pollution", "Climate change"],
-    crustacean: ["Overfishing", "Pollution", "Climate change"],
-    mollusk: ["Overfishing", "Pollution", "Climate change"],
-    "marine plant": ["Pollution", "Warming waters", "Overfishing"],
   }
   return mapping[commonName] || ["Marine pollution", "Climate change"]
 }
@@ -94,43 +78,33 @@ export async function POST(request: NextRequest) {
         }),
       })
 
-      const responseText = await response.text()
-
       if (response.ok) {
-        try {
-          const mlResult = JSON.parse(responseText)
+        const mlResult = await response.json()
 
-          const processedResult = {
-            species: mlResult.map((item: any, index: number) => ({
-              id: (index + 1).toString(),
-              name: item.label.charAt(0).toUpperCase() + item.label.slice(1),
-              scientificName: getScientificName(item.label),
-              conservationStatus: getConservationStatus(item.label),
-              habitat: getHabitat(item.label),
-              threats: getThreats(item.label),
-              confidence: item.score,
-            })),
-            primarySpecies: {
-              id: "1",
-              name: mlResult[0]?.label.charAt(0).toUpperCase() + mlResult[0]?.label.slice(1) || "Unknown Species",
-              scientificName: getScientificName(mlResult[0]?.label),
-              conservationStatus: getConservationStatus(mlResult[0]?.label),
-              habitat: getHabitat(mlResult[0]?.label),
-              threats: getThreats(mlResult[0]?.label),
-              confidence: mlResult[0]?.score || 0,
-            },
-            location,
-            timestamp: new Date(),
-          }
-
-          return NextResponse.json(processedResult)
-        } catch (parseError) {
-          console.error("Failed to parse ML API response as JSON:", responseText)
-          throw new Error("Invalid JSON response from ML API")
+        const processedResult = {
+          species: mlResult.map((item: any, index: number) => ({
+            id: (index + 1).toString(),
+            name: item.label.charAt(0).toUpperCase() + item.label.slice(1),
+            scientificName: getScientificName(item.label),
+            conservationStatus: getConservationStatus(item.label),
+            habitat: getHabitat(item.label),
+            threats: getThreats(item.label),
+            confidence: item.score,
+          })),
+          primarySpecies: {
+            id: "1",
+            name: mlResult[0]?.label.charAt(0).toUpperCase() + mlResult[0]?.label.slice(1) || "Unknown Species",
+            scientificName: getScientificName(mlResult[0]?.label),
+            conservationStatus: getConservationStatus(mlResult[0]?.label),
+            habitat: getHabitat(mlResult[0]?.label),
+            threats: getThreats(mlResult[0]?.label),
+            confidence: mlResult[0]?.score || 0,
+          },
+          location,
+          timestamp: new Date(),
         }
-      } else {
-        console.error("ML API error response:", response.status, responseText)
-        throw new Error(`ML API returned ${response.status}: ${responseText}`)
+
+        return NextResponse.json(processedResult)
       }
     } catch (mlError) {
       console.error("ML API error:", mlError)

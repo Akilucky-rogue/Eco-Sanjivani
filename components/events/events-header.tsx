@@ -1,5 +1,7 @@
 "use client"
 
+import { Navigation } from "@/components/navigation"
+
 export function EventsHeader() {
-  return null // No longer rendering Navigation since it's handled in layout
+  return <Navigation />
 }

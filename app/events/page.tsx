@@ -1,3 +1,4 @@
+import { Navigation } from "@/components/navigation"
 import { EventsHeader } from "@/components/events/events-header"
 import { EventFilters } from "@/components/events/event-filters"
 import { EventGrid } from "@/components/events/event-grid"
@@ -5,9 +6,10 @@ import { CreateEventButton } from "@/components/events/create-event-button"
 
 export default function EventsPage() {
   return (
-    <div>
+    <div className="min-h-screen bg-background">
+      <Navigation />
       <EventsHeader />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Filters sidebar */}
           <div className="lg:w-80">
@@ -26,7 +28,7 @@ export default function EventsPage() {
             <EventGrid />
           </div>
         </div>
-      </div>
+      </main>
     </div>
   )
 }

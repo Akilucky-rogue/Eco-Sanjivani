@@ -3,40 +3,26 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Camera, Upload, Loader2, MapPin, AlertCircle } from "lucide-react"
+import { Camera, Upload, Loader2, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { EcosystemSpeciesClassifier, type SpeciesIdentificationResult } from "@/lib/ml/ecosystem-species-classifier"
+import { MarineSpeciesClassifier, type SpeciesIdentificationResult } from "@/lib/ml/marine-species-classifier"
 import { useGeolocation } from "@/lib/hooks/use-geolocation"
 
 export function SpeciesIdentifier() {
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [result, setResult] = useState<SpeciesIdentificationResult | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [error, setError] = useState<string | null>(null)
   const { location, getCurrentLocation } = useGeolocation()
 
-  const classifier = new EcosystemSpeciesClassifier()
+  const classifier = new MarineSpeciesClassifier()
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
-      if (file.size > 10 * 1024 * 1024) {
-        // 10MB limit
-        setError("File size must be less than 10MB")
-        return
-      }
-
-      if (!file.type.startsWith("image/")) {
-        setError("Please select a valid image file")
-        return
-      }
-
       setSelectedFile(file)
       setResult(null)
-      setError(null)
     }
   }
 
@@ -44,20 +30,12 @@ export function SpeciesIdentifier() {
     if (!selectedFile) return
 
     setIsAnalyzing(true)
-    setError(null)
-
     try {
-      console.log("[v0] Starting species identification...")
       await getCurrentLocation()
-      console.log("[v0] Location obtained, calling classifier...")
-
       const identificationResult = await classifier.identifySpecies(selectedFile, location || undefined)
-      console.log("[v0] Species identification completed:", identificationResult)
-
       setResult(identificationResult)
     } catch (error) {
-      console.error("[v0] Species identification failed:", error)
-      setError("Unable to identify species. Please try again with a clearer image.")
+      console.error("Species identification failed:", error)
     } finally {
       setIsAnalyzing(false)
     }
@@ -83,20 +61,13 @@ export function SpeciesIdentifier() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Camera className="h-5 w-5" />
-          Ecosystem Species Identifier
+          Marine Species Identifier
         </CardTitle>
         <CardDescription>
-          Upload a photo to identify species from any ecosystem and learn about their conservation status
+          Upload a photo to identify marine species and learn about their conservation status
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        {error && (
-          <Alert variant="destructive">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
-
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
             <input type="file" accept="image/*" onChange={handleFileSelect} className="hidden" id="species-upload" />

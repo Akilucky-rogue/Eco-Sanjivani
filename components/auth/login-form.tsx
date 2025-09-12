@@ -29,8 +29,12 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
     setError("")
 
     try {
-      // Simple email/password validation for demo
       const users = userStorage.getAll()
+      console.log(
+        "[v0] Available users:",
+        users.map((u) => u.email),
+      )
+
       const user = users.find((u) => u.email === email)
 
       if (!user) {
@@ -38,22 +42,37 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
         return
       }
 
-      // In a real app, you'd verify the password hash
-      // For demo purposes, we'll just log them in
+      // For demo purposes, accept any password for existing users
+      console.log("[v0] Login successful for user:", user.name)
       login(user.id)
       onSuccess?.()
     } catch (err) {
+      console.log("[v0] Login error:", err)
       setError("Login failed. Please try again.")
     } finally {
       setIsLoading(false)
     }
   }
 
+  const handleDemoLogin = () => {
+    setEmail("akshat.vora@email.com")
+    setPassword("demo123")
+    // Trigger login immediately
+    setTimeout(() => {
+      const users = userStorage.getAll()
+      const demoUser = users.find((u) => u.email === "akshat.vora@email.com")
+      if (demoUser) {
+        login(demoUser.id)
+        onSuccess?.()
+      }
+    }, 100)
+  }
+
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl font-bold text-blue-600">Welcome Back</CardTitle>
-        <CardDescription>Sign in to continue your marine conservation journey</CardDescription>
+        <CardDescription>Sign in to continue your ecosystem conservation journey</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -98,10 +117,19 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
             </button>
           </div>
 
-          <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+          <div className="mt-4 p-3 bg-blue-50 rounded-lg space-y-2">
             <p className="text-sm text-blue-800 font-medium">Demo Account:</p>
             <p className="text-xs text-blue-600">Email: akshat.vora@email.com</p>
             <p className="text-xs text-blue-600">Use any password</p>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={handleDemoLogin}
+              className="w-full mt-2 text-blue-600 border-blue-200 hover:bg-blue-50 bg-transparent"
+            >
+              Quick Demo Login
+            </Button>
           </div>
         </form>
       </CardContent>

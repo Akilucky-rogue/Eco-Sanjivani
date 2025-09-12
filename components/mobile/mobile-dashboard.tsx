@@ -23,11 +23,17 @@ export function MobileDashboard() {
   }
 
   if (!currentUser) {
-    return null
+    return (
+      <div className="p-4 text-center">
+        <p className="text-muted-foreground">Please sign in to view your dashboard</p>
+      </div>
+    )
   }
 
   return (
     <div className="pb-20">
+      {" "}
+      {/* Add padding for bottom nav */}
       {/* Welcome Section */}
       <div className="bg-gradient-to-r from-blue-600 to-teal-600 text-white p-4 rounded-b-lg">
         <div className="flex items-center gap-3">
@@ -46,7 +52,6 @@ export function MobileDashboard() {
           <span className="text-sm">{currentUser.points} points</span>
         </div>
       </div>
-
       {/* Quick Stats */}
       <div className="p-4 space-y-3">
         <h2 className="font-semibold text-lg">Your Impact</h2>
@@ -67,7 +72,6 @@ export function MobileDashboard() {
           />
         </div>
       </div>
-
       {/* Upcoming Events */}
       <div className="p-4 space-y-3">
         <div className="flex items-center justify-between">
@@ -82,12 +86,10 @@ export function MobileDashboard() {
           ))}
         </div>
       </div>
-
       {/* Live Updates */}
       <div className="p-4">
         <LiveEventUpdates />
       </div>
-
       {/* Community Chat */}
       <div className="p-4">
         <Card>

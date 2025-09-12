@@ -47,10 +47,9 @@ export function FeaturesSection() {
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-balance mb-4">Powerful Features for Ecosystem Conservation</h2>
+          <h2 className="text-3xl font-bold text-balance mb-4">Powerful Features for Marine Conservation</h2>
           <p className="text-lg text-muted-foreground text-pretty max-w-2xl mx-auto">
-            Our platform combines gamification, community building, and AI to maximize environmental impact across all
-            ecosystems
+            Our platform combines gamification, community building, and AI to maximize environmental impact
           </p>
         </div>
 

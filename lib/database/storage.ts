@@ -15,9 +15,15 @@ const STORAGE_KEYS = {
 export function initializeData() {
   if (typeof window === "undefined") return
 
+  console.log("[v0] Initializing database...")
+
   if (!localStorage.getItem(STORAGE_KEYS.USERS)) {
+    console.log("[v0] Creating initial users...")
     localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(mockUsers))
+  } else {
+    console.log("[v0] Users already exist in localStorage")
   }
+
   if (!localStorage.getItem(STORAGE_KEYS.EVENTS)) {
     localStorage.setItem(STORAGE_KEYS.EVENTS, JSON.stringify(mockEvents))
   }
@@ -30,6 +36,8 @@ export function initializeData() {
   if (!localStorage.getItem(STORAGE_KEYS.NOTIFICATIONS)) {
     localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify([]))
   }
+
+  console.log("[v0] Database initialization complete")
 }
 
 // User operations
@@ -37,7 +45,9 @@ export const userStorage = {
   getAll: (): User[] => {
     if (typeof window === "undefined") return mockUsers
     const data = localStorage.getItem(STORAGE_KEYS.USERS)
-    return data ? JSON.parse(data) : mockUsers
+    const users = data ? JSON.parse(data) : mockUsers
+    console.log("[v0] Retrieved users:", users.length)
+    return users
   },
 
   getById: (id: string): User | null => {

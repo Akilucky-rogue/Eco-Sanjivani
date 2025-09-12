@@ -3,24 +3,18 @@
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { Home, Calendar, Brain, Users, Trophy } from "lucide-react"
-import { useCurrentUser } from "@/lib/hooks/use-database"
+import { Home, Calendar, TrendingUp, Users, Trophy } from "lucide-react"
 
 const navItems = [
   { href: "/dashboard", label: "Home", icon: Home },
   { href: "/events", label: "Events", icon: Calendar },
-  { href: "/ml", label: "AI Tools", icon: Brain },
+  { href: "/predictions", label: "Insights", icon: TrendingUp },
   { href: "/community", label: "Community", icon: Users },
   { href: "/rewards", label: "Rewards", icon: Trophy },
 ]
 
 export function MobileBottomNav() {
   const pathname = usePathname()
-  const { currentUser } = useCurrentUser()
-
-  if (!currentUser) {
-    return null
-  }
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border md:hidden">
