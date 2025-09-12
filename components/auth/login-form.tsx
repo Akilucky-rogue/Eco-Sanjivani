@@ -100,7 +100,7 @@ export function LoginForm({ onSuccess, onSwitchToSignup }: LoginFormProps) {
 
           <div className="mt-4 p-3 bg-blue-50 rounded-lg">
             <p className="text-sm text-blue-800 font-medium">Demo Account:</p>
-            <p className="text-xs text-blue-600">Email: priya.sharma@email.com</p>
+            <p className="text-xs text-blue-600">Email: akshat.vora@email.com</p>
             <p className="text-xs text-blue-600">Use any password</p>
           </div>
         </form>

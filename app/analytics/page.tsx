@@ -1,4 +1,3 @@
-import { Navigation } from "@/components/navigation"
 import { ImpactMetrics } from "@/components/analytics/impact-metrics"
 import { ImpactCharts } from "@/components/analytics/impact-charts"
 
@@ -19,9 +18,8 @@ const impactData = {
 
 export default function AnalyticsPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <Navigation />
-      <main className="container mx-auto px-4 py-8 space-y-8">
+    <div className="pb-20 md:pb-0">
+      <div className="container mx-auto px-4 py-8 space-y-8">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold">Impact Analytics</h1>
           <p className="text-muted-foreground">Track our collective environmental impact and conservation efforts</p>
@@ -29,7 +27,7 @@ export default function AnalyticsPage() {
 
         <ImpactMetrics data={impactData} />
         <ImpactCharts />
-      </main>
+      </div>
     </div>
   )
 }

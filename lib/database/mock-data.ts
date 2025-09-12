@@ -5,7 +5,7 @@ export const mockUsers: User[] = [
   {
     id: "1",
     email: "akshat.vora@email.com", // Updated email from Priya to Akshat
-    name: "Akshat Vora", // Updated name from Priya Sharma to Akshat Vora
+    name: "Akshat Vora", // Ensuring consistent user name
     avatar: "/placeholder.svg?height=40&width=40",
     points: 2450,
     level: 8,
@@ -84,7 +84,7 @@ export const mockPosts: CommunityPost[] = [
     id: "1",
     authorId: "1",
     author: {
-      name: "Akshat Vora", // Updated name from Priya Sharma to Akshat Vora
+      name: "Akshat Vora", // Ensuring consistent user name in posts
       avatar: "/placeholder.svg?height=40&width=40",
       level: 8,
     },

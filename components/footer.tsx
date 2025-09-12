@@ -12,8 +12,8 @@ export function Footer() {
               <span className="font-bold text-xl text-foreground">Eco-Sanjivani</span>
             </div>
             <p className="text-muted-foreground text-pretty max-w-md mb-4">
-              Protecting India's marine ecosystems through gamified community action. Join thousands of volunteers
-              making a measurable impact on ocean conservation.
+              Protecting India's entire ecosystem through gamified community action. Join thousands of volunteers making
+              a measurable impact on environmental conservation across forests, wetlands, mountains, and coastal areas.
             </p>
             <div className="flex space-x-4">
               <Link href="#" className="text-muted-foreground hover:text-primary">

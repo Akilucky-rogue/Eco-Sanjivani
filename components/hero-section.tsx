@@ -7,15 +7,15 @@ export function HeroSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <div className="text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-balance mb-6">
-            Protect India's Marine
-            <span className="text-primary block">Ecosystems Together</span>
+            Protect India's Entire
+            <span className="text-primary block">Ecosystem Together</span>
           </h1>
           <p className="text-xl text-muted-foreground text-pretty max-w-3xl mx-auto mb-8">
-            Join thousands of volunteers in gamified marine conservation. Track your impact, earn rewards, and help
-            clean over 1.5 million tons of plastic waste from our oceans.
+            Join thousands of volunteers in gamified ecosystem conservation. Track your impact, earn rewards, and help
+            protect forests, wetlands, grasslands, mountains, and coastal areas across India.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="text-lg px-8">
+            <Button size="lg" className="text-lg px-8 bg-primary text-primary-foreground hover:bg-primary/90">
               Start Your Journey
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
